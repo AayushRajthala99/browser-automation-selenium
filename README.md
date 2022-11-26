@@ -6,3 +6,4 @@
 (o) Done:
 - Added page screenshot functionality from url.
 - Added URL Verification using Regular Expression & Socket.
+- Added Loggers.

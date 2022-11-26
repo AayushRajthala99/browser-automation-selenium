@@ -1,0 +1,13 @@
+26-Nov-22 22:43:28 - URL: asdasd [INVALID URL]
+26-Nov-22 22:43:28 - URL: https://123 [INVALID URL]
+26-Nov-22 22:43:28 - URL: asd [INVALID URL]
+26-Nov-22 22:43:28 - URL: http://123.xyz [ERROR]::: [Errno 11001] getaddrinfo failed
+26-Nov-22 22:43:38 - URL: https://asd.xyz [TIMEOUT]
+26-Nov-22 22:43:48 - URL: asd.xyz [TIMEOUT]
+26-Nov-22 22:43:48 - URL: .com.xyz [INVALID URL]
+26-Nov-22 22:43:50 - URL: https://google.com [ACTION SUCCESSFUL]
+26-Nov-22 22:43:51 - URL: https://www.google.com [ACTION SUCCESSFUL]
+26-Nov-22 22:43:52 - URL: http://google.com [ACTION SUCCESSFUL]
+26-Nov-22 22:43:52 - URL: https://google.com [ACTION SUCCESSFUL]
+26-Nov-22 22:43:53 - URL: http://www.google.com [ACTION SUCCESSFUL]
+26-Nov-22 22:43:54 - URL: https://www.google.com [ACTION SUCCESSFUL]

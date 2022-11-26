@@ -19,7 +19,7 @@ Logger.basicConfig(filename="./logs/operations.log", filemode='a', format='%(asc
 UrlRegex = "^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
 
 # Load URLs as array from .txt file...
-urlList = np.genfromtxt("urls.txt",dtype='str')
+urlList = np.genfromtxt("./urls.txt",dtype='str')
 print(urlList)
 
 def screenshotPage(urls):
@@ -64,8 +64,11 @@ def screenshotPage(urls):
             # URL Formatting for Logger...
             if(re.match("http://",url[0:7:1])):
                 Logger.error("URL: %s [INVALID URL]",url[7:(7+urlLength):1])
-            else:    
-                Logger.error("URL: %s [INVALID URL]",url[8:(8+urlLength):1])
+            else:
+                if(urlLength<len(url)):
+                    Logger.error("URL: %s [INVALID URL]",url[8:(8+urlLength):1])
+                else:
+                    Logger.error("URL: %s [INVALID URL]",url[0:(8+urlLength):1])
             pass
 
         # Exception Handling for Session Timeout...
@@ -73,7 +76,7 @@ def screenshotPage(urls):
             # isrunning = 0
             if(re.match("http://",url[0:7:1])):
                 Logger.error("URL: %s [TIMEOUT]",url[7:(7+urlLength):1])
-            else:    
+            else:
                 if(urlLength<len(url)):
                     Logger.error("URL: %s [TIMEOUT]",url[8:(8+urlLength):1])
                 else:

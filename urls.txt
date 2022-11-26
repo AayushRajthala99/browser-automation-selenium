@@ -1,7 +1,14 @@
-google.com
-facebook.com
 asdasd
-asdasdasdasd
 
-qweqwe
-youtube.com
+https://123
+http://asd
+http://123.xyz
+https://asd.xyz
+asd.xyz
+.com.xyz
+google.com
+www.google.com
+http://google.com
+https://google.com
+http://www.google.com
+https://www.google.com

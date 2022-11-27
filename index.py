@@ -15,6 +15,22 @@ driver = webdriver.Chrome(options=options)
 # Logger Configurations...
 Logger.basicConfig(filename="./logs/operations.log", filemode='a', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',level=Logger.INFO)
 
+# Log Formatter...
+def Log(url,urlLen,message,error):
+    if(error != None):
+        Logger.info("URL: %s [%s]::: %s",url,message,error)
+        return
+    
+    if(re.match("http://",url[0:7:1]) and urlLen<len(url)):
+        Logger.info("URL: %s [%s]",url[7:(7+urlLen):1],message)
+        return
+
+    if(urlLen<len(url)):
+        Logger.info("URL: %s [%s]",url[8:(8+urlLen):1],message)
+    else:
+        Logger.info("URL: %s [%s]",url[0:(8+urlLen):1],message)
+    return
+
 # Regular Expression for URL Verification...
 UrlRegex = "^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
 
@@ -52,35 +68,22 @@ def screenshotPage(urls):
                 driver.get(url)
                 driver.set_window_size(1920,1080) # Window Resolution Configuration...
                 driver.get_screenshot_as_file("./screenshots/"+driver.title[0:6]+"-"+datetime.now().strftime("%d%m%YT%H%M%S")+".png")
-                Logger.info("URL: %s [ACTION SUCCESSFUL]",url)
+                Log(url,urlLength,'ACTION SUCCESSFUL',None)
 
         # Exception Handling for Unresolved URLs...
         except socket.gaierror as error:
-            Logger.error("URL: %s [ERROR]::: %s",url,error)
+            Log(url,urlLength,'ERROR',error)
             pass
 
         # Exception Handling for Invalid Format URLs...
         except ValueError:
-            # URL Formatting for Logger...
-            if(re.match("http://",url[0:7:1])):
-                Logger.error("URL: %s [INVALID URL]",url[7:(7+urlLength):1])
-            else:
-                if(urlLength<len(url)):
-                    Logger.error("URL: %s [INVALID URL]",url[8:(8+urlLength):1])
-                else:
-                    Logger.error("URL: %s [INVALID URL]",url[0:(8+urlLength):1])
+            Log(url,urlLength,'INVALID URL',None)
             pass
 
         # Exception Handling for Session Timeout...
         except TimeoutException:
             # isrunning = 0
-            if(re.match("http://",url[0:7:1])):
-                Logger.error("URL: %s [TIMEOUT]",url[7:(7+urlLength):1])
-            else:
-                if(urlLength<len(url)):
-                    Logger.error("URL: %s [TIMEOUT]",url[8:(8+urlLength):1])
-                else:
-                    Logger.error("URL: %s [TIMEOUT]",url[0:(8+urlLength):1])
+            Log(url,urlLength,'SESSION TIMEOUT',None)
             pass
 
 screenshotPage(urlList)
